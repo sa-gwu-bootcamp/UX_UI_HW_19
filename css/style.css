@@ -25,10 +25,12 @@ body {
   background-color: whitesmoke;
 }
 
-/* Base styles for desktop */
+.nav-item {
+  cursor: pointer;
+}
+
 #hamburger-menu {
   display: none;
-  /* Hidden by default, shown only on mobile */
   cursor: pointer;
 }
 
@@ -38,10 +40,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .98);
-  /* Semi-transparent black background */
+  background-color: rgba(0, 0, 0, .8);
   z-index: 100;
-  /* Ensure it's above other content */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,9 +57,7 @@ body {
   padding: 10px;
   text-align: center;
   font-size: 24px;
-  /* Larger font for easier touch */
   color: white;
-  /* Assuming a dark background, choose a color that stands out */
   font-weight: bold;
 }
 
@@ -76,45 +74,56 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* This will vertically center the child elements */
   justify-content: center;
-  /* This will horizontally center the child elements */
   height: 75vh;
   width: 100vw;
-  margin-bottom: 20rem;
 }
 
 #canvas-container {
   width: 50vw;
-  /* Take up half of the viewport width */
   height: 100vh;
-  /* Take up the entire viewport height */
   display: flex;
   justify-content: center;
-  /* Center the canvas inside this container */
   align-items: center;
-  /* Align vertically */
 }
 
 #info-container {
   width: 50vw;
-  /* Take up the remaining half of the viewport width */
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* This will vertically center your text */
   align-items: flex-start;
-  /* Align text to the start (left) */
   font-size: 2rem;
 }
 
 /* Styles for desktop screens */
 @media (min-width: 933px) {
-
-  /* Adjust the max-width as needed for your breakpoint */
   #info-caption {
-    width: 75vh;
+    width: 50vh;
+  }
+  .nav-item {
+    background: linear-gradient(0deg, slateblue, rgb(139, 23, 33)) no-repeat right bottom / 0 var(--bg-h);
+    transition: background-size 350ms;
+    --bg-h: 100%;
+  }
+  
+  .nav-item:where(:hover, :focus-visible) {
+    background-size: 100% var(--bg-h);
+    background-position-x: left;
+    color:#F5F5F5;
+  }
+  
+  .name-hover {
+    background: linear-gradient(0deg, slateblue, rgb(139, 23, 33)) no-repeat right bottom / 0 var(--bg-h);
+    transition: background-size 350ms;
+    --bg-h: 100%;
+  }
+  
+  .name-hover:where(:hover, :focus-visible) {
+    background-size: 100% var(--bg-h);
+    background-position-x: left;
+    color:#F5F5F5;
   }
 }
 
@@ -123,8 +132,6 @@ body {
 #content {
   position: relative;
   z-index: 2;
-  /* Ensure it's above the canvas layer */
-  /* Your content styling */
 }
 
 header {
@@ -134,7 +141,6 @@ header {
   width: 100vw;
   padding: 2rem;
   box-sizing: border-box;
-  /* This ensures that padding is included in the width */
   display: flex !important;
   align-items: center;
   justify-content: space-between;
@@ -163,11 +169,9 @@ header p {
 
 section {
   padding: 50px 0;
-  /* Example padding */
   margin-bottom: 20rem;
 }
 
-/* My UX Skills Section */
 .flexContainer {
   display: flex;
   padding: 5% 15%;
@@ -185,27 +189,42 @@ section {
   display: flex;
   justify-content: center;
   padding-top: 5rem;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 #skillImg {
   margin: 10%;
 }
 
-/* Styles for mobile screens */
+#skills.active-section {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .98);
+  color: #F5F5F5;
+  overflow-y: auto;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  z-index: 10;
+}
+
 @media (max-width: 932px) {
 
-  /* Adjust the max-width as needed for your breakpoint */
   #wrapper {
     flex-direction: column !important;
-    /* Stack children vertically on small screens */
   }
 
   #canvas-container,
   #info-container {
     width: 100vw;
-    /* Each child takes up the full viewport width */
     align-items: center;
-    /* Center content horizontally */
+    font-size: 1rem;
   }
 
   #canvas-container {
@@ -215,25 +234,18 @@ section {
 
   #info-container {
     padding: 20px;
-    /* Add padding around the text content */
     text-align: center;
-    /* Center the text for mobile */
   }
 
   header ul {
     display: none;
-    /* Hide the desktop menu */
   }
 
   #hamburger-menu {
     display: block;
-    /* Show the hamburger menu */
     top: 1rem;
-    /* Adjust as needed */
     right: 1rem;
-    /* Adjust as needed */
     z-index: 11;
-    /* Above the header elements */
     font-size: 2rem;
   }
 
@@ -253,4 +265,17 @@ section {
     text-align: center;
     font-size: 1.5rem;
   }
+
+  #skills.active-section {
+    align-content: flex-start;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem; 
+  cursor: pointer;
+  font-size: 2rem;
+  z-index: 11;
 }
